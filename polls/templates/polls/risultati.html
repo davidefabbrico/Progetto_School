@@ -1,0 +1,313 @@
+<html lang="it">
+
+<head>
+  <title>Risultati</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+
+</head>
+<style>
+  .endbutton {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .scaricapdf {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: -30px;
+  }
+
+  h1.text-center {
+    margin-top: 50px;
+  }
+
+  .utente {
+    color:#f76743;
+    margin-bottom: 20px;
+  }
+
+</style>
+
+<body style="background-color: #f5f5f5;">
+
+  <div class="container" style="text-align: center; margin-top: 50px; margin: auto; overflow-x:auto;">
+    <h1 class="text-center" style="color:#459dff; font-weight: bold;">Risultati S.C.H.O.O.L.</h1><br>
+    <h4 class="utente"> <b>Nome utente:</b> {{request.user}}</h4>
+    <h4 class="utente"><b>Id numero:</b> {{request.user.id}}</h4>
+    <h3 class="text-center" style="font-weight: 700;">Dimensioni selezionate</h3><br>
+    <table class="table table-striped" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>Corsi di Recupero / Approfondimento</th>
+          <th>Attività extracurriculari</th>
+          <th>Borsa di Studio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if d %}
+        {% for i in d %}
+        <tr>
+          <td>{{i.crecupero}}</td>
+          <td>{{i.extracurr}}</td>
+          <td>{{i.bStudio}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center; margin-top: 50px; margin: auto; overflow-x:auto;">
+    <table class="table table-striped" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Certificazioni</th>
+          <th>Tutoraggio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if d %}
+        {% for i in d %}
+        <tr>
+          <td>{{i.stage}}</td>
+          <td>{{i.certificazioni}}</td>
+          <td>{{i.tutOrient}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center;margin: auto; overflow-x:auto;">
+    <table class="table table-striped" style="text-align: center;margin: auto;">
+      <thead>
+        <tr>
+          <th>Aree di interesse</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if areaint != None %}
+        {% for i in areaint %}
+        <tr>
+          <td>{{i}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center; overflow-x:auto;">
+    <table class="table table-striped" style="text-align: center;margin: auto;">
+      <thead>
+        <tr>
+          <th>Dettagli Aree di interesse</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if dettagli != None %}
+        {% for i in dettagli %}
+        <tr>
+          <td>{{i}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center; overflow-x:auto;">
+    <table class="table table-striped" style="text-align: center;margin: auto;">
+      <thead>
+        <tr>
+          <th>Macro Materie</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if parsub != None %}
+        {% for i in parsub %}
+        <tr>
+          <td>{{i}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center; overflow-x:auto;">
+    <table class="table table-striped" style="text-align: center;margin: auto;">
+      <thead>
+        <tr>
+          <th>Materie</th>
+        </tr>
+      </thead>
+      <tbody> 
+        {% if subject != None %}
+        {% for i in subject %}
+        <tr>
+          <td>{{i}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center;margin: auto; margin-top:40px; overflow-x:auto;">
+    <h3 class="text-center" style="font-weight: 700;">Scuole suggerite</h3><br>
+    <h5 class="text-center" style="font-weight: 700;">Informazioni su Lavoro, Università e Distanza da dove ti trovi adesso</h5><br>
+    <p>
+      Nella tabella che segue, per ciascuna scuola suggerita da S.C.H.O.O.L. trovi, se disponibili, informazioni in merito 
+      all’Indice di Occupazione che ci dice qual è la percentuale dei diplomati occupati come indice di potenziale occupabilità 
+      post diploma (colonna “Lavoro”), la media degli studenti universitari provenienti dai diversi licei ed istituti tecnici 
+      (colonna “Università”) e la distanza dalla tua posizione. I dati della preparazione al mondo del lavoro e all’Università 
+      sono ricavati dal sito Eduscopio della Fondazione Agnelli, vedi <a href="https://eduscopio.it/">qui</a>.
+    </p>
+    <table class="table table-striped" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>Scuola</th>
+          <th>Lavoro</th>
+          <th>Università</th>
+          <th>Distanza (km)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if school %}
+        {% for i in school %}
+        <tr>
+          <td>{{i.school_name}}</td>
+          <td>{{i.lavoro}}</td>
+          <td>{{i.uni}}</td>
+          <td>{{i.distance}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center;margin: auto; margin-top:40px; overflow-x:auto;">
+    <p>
+      Nelle due tabelle che seguono trovi delle informazioni aggiuntive per meglio farti conoscere le scuole a te suggerite. 
+      Nella prima tabella “Informazioni sulle materie” trovi nel dettaglio le materie insegnate dalle scuole che hai selezionato; 
+      nella seconda tabella “Area di interesse” trovi informazioni in merito al tipo di istruzione da esse offerto.
+    </p>
+    <h5 class="text-center" style="font-weight: 700;">Informazioni sulle Materie</h5><br>
+    <table class="table table-striped" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>Scuola</th>
+          <th>Macro Materie</th>
+          <th>Materie</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if school_deta %}
+        {% for i in school_deta %}
+        <tr>
+          <td>{{i.school_name}}</td>
+          <td>{{i.sub__parsub__parsub}}</td>
+          <td>{{i.sub__name_sub}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" style="text-align: center;margin: auto; margin-top:40px; overflow-x:auto;">
+    <h5 class="text-center" style="font-weight: 700;">Informazioni sull'Area di interesse</h5><br>
+    <table class="table table-striped" style="text-align: center;">
+      <thead>
+        <tr>
+          <th>Scuola</th>
+          <th>Macro Aree di interesse</th>
+          <th>Aree di interesse</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if school_deta %}
+        {% for i in school_deta %}
+        <tr>
+          <td>{{i.school_name}}</td>
+          <td>{{i.dettagli_area_interesse__name_ai__name_ai}}</td>
+          <td>{{i.dettagli_area_interesse__det_ai}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- https://stackoverflow.com/questions/17293135/download-a-div-in-a-html-page-as-pdf-using-javascript -->
+</body>
+<div data-html2canvas-ignore>
+  <h5 style="margin:auto; text-align: center; margin-top: 40px; margin-bottom: 20px;">
+    Clicca sul tasto “Home” per tornare a provare altre combinazioni di dimensioni.
+  </h5>
+  <h5 style="margin:auto; text-align: center; margin-top: 40px; margin-bottom: 20px;">
+    Clicca il tasto “Salva PDF” se vuoi salvare in un documento i risultati di questa tua ricerca.
+  </h5>
+  <h6 style="color: #f76743;
+    text-align: center;
+    font-weight: 900;
+    margin-bottom: 30px;">
+    Ricordati di premere RESET per cancellare le precedenti selezioni.
+  </h6>
+  <div class="endbutton">
+    <a class="btn btn-primary fineButton" href="/home" role="button">Home</a>
+    <button id="clickbind" class="btn btn-warning">Scarica PDF</button>
+  </div>
+</div>
+
+
+
+<script>
+  function onClick() {
+    html2canvas(document.body, {
+      onrendered: function(canvas) {
+        var imgData = canvas.toDataURL('image/png');
+        var imgWidth = 210; 
+        var pageHeight = 295;  
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+        var doc = new jsPDF('p', 'mm');
+        var position = 10;
+      
+        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      
+        while (heightLeft >= 0) {
+          position += heightLeft - imgHeight;
+          doc.addPage();
+          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+        doc.save( 'school.pdf');
+      }
+
+    });
+  };
+
+
+  var element = document.getElementById("clickbind");
+  element.addEventListener("click", onClick);
+</script>
+
+
+</html>

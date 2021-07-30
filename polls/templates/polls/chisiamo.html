@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it" >
+<head>
+  <meta charset="UTF-8">
+  <title>Chi siamo?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+
+
+</head>
+<style>
+:root {
+  --d: 700ms;
+  --e: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.page-content {
+  display: grid;
+  grid-gap: 1rem;
+  padding: 1rem;
+  max-width: 1024px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+@media (min-width: 600px) {
+  .page-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 800px) {
+  .page-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  color: whitesmoke;
+  background-color: whitesmoke;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
+}
+@media (min-width: 600px) {
+  .card {
+    height: 380px;
+  }
+}
+.card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  background-size: cover;
+  background-position: 0 0;
+  transition: transform calc(var(--d) * 1.5) var(--e);
+  pointer-events: none;
+}
+.card:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.009) 11.7%, rgba(0, 0, 0, 0.034) 22.1%, rgba(0, 0, 0, 0.072) 31.2%, rgba(0, 0, 0, 0.123) 39.4%, rgba(0, 0, 0, 0.182) 46.6%, rgba(0, 0, 0, 0.249) 53.1%, rgba(0, 0, 0, 0.32) 58.9%, rgba(0, 0, 0, 0.394) 64.3%, rgba(0, 0, 0, 0.468) 69.3%, rgba(0, 0, 0, 0.54) 74.1%, rgba(0, 0, 0, 0.607) 78.8%, rgba(0, 0, 0, 0.668) 83.6%, rgba(0, 0, 0, 0.721) 88.7%, rgba(0, 0, 0, 0.762) 94.1%, rgba(0, 0, 0, 0.79) 100%);
+  transform: translateY(-50%);
+  transition: transform calc(var(--d) * 2) var(--e);
+}
+.card:nth-child(1):before {
+  background-image: url('/static/davide.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.card:nth-child(2):before {
+  background-image: url('/static/massimiliano.jpg');
+}
+.card:nth-child(3):before {
+  background-image: url('https://viterbo.unicusano.it/wp-content/uploads/2018/09/sociologia-della-devianza-878x400.jpg');
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  transition: transform var(--d) var(--e);
+  z-index: 1;
+}
+.content > * + * {
+  margin-top: 1rem;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-top: 70px;
+}
+
+.copy {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.125rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+
+@media (hover: hover) and (min-width: 600px) {
+  .card:after {
+    transform: translateY(0);
+  }
+
+  .content {
+    transform: translateY(calc(100% - 4.5rem));
+  }
+  .content > *:not(.title) {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: transform var(--d) var(--e), opacity var(--d) var(--e);
+  }
+
+  .card:hover,
+.card:focus-within {
+    align-items: center;
+  }
+  .card:hover:before,
+.card:focus-within:before {
+    transform: translateY(-4%);
+  }
+  .card:hover:after,
+.card:focus-within:after {
+    transform: translateY(-50%);
+  }
+  .card:hover .content,
+.card:focus-within .content {
+    transform: translateY(0);
+  }
+  .card:hover .content > *:not(.title),
+.card:focus-within .content > *:not(.title) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--d) / 8);
+  }
+
+  .card:focus-within:before, .card:focus-within:after,
+.card:focus-within .content,
+.card:focus-within .content > *:not(.title) {
+    transition-duration: 0s;
+  }
+
+}
+
+.descrizione {margin: auto;width: 95vw;margin-bottom: 3vw;}
+.titolo {margin: auto;text-align: center;margin-top: 4vw;margin-bottom: 3vw; color: unset;}
+</style>
+<body style="background-color: #f5f5f5;">
+  <div class='titolo'>
+    <h1>Perché S.C.H.O.O.L.?</h1>
+  </div>
+  <div class="descrizione">
+    <p>
+      S.C.H.O.O.L. è un progetto di ricerca di economia comportamentale svolto da tre studenti dell’Università degli Studi di 
+      Milano-Bicocca e dell’Università degli Studi di Firenze e con la collaborazione del Comune di Seregno. L’obiettivo 
+      di S.C.H.O.O.L. è aiutare gli studenti delle scuole medie nella scelta della scuola superiore proponendo una semplificazione 
+      del processo decisionale. S.C.H.O.O.L. è attualmente nella fase di testing, e a tal fine è indirizzato agli studenti di 
+      seconda media con l’obiettivo di testarne il funzionamento e il livello di soddisfazione dell’utenza. I dati del testing 
+      ci permetteranno di migliorare lo strumento e di valutarne le potenzialità al fine di una sua applicazione estensiva 
+      durante l’evento “Salone dell’orientamento” previsto in autunno a Seregno. Attualmente nel nostro database sono inserite 
+      41 scuole che partecipano all’evento prima citato, consultabili <a href="https://documentcloud.adobe.com/gsuiteintegration/index.html?state=%7B%22ids%22%3A%5B%221Wj9C3_R1aPgvMwxyU-SWufcjs-oQi4QT%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22104390482255287315564%22%2C%22resourceKeys%22%3A%7B%7D%7D">qui</a>.
+      S.C.H.O.O.L. è così strumento aggiuntivo che gli studenti possono utilizzare nel percorso di scelta della scuola superiore, 
+      affiancandosi e integrando le tradizionali attività di orientamento.
+      Ma che cos’è l’economia comportamentale? È la scienza che studia come gli individui prendono le decisioni. 
+      Abbiamo deciso di applicare gli strumenti dell’economia comportamentale alla scelta della scuola superiore perché 
+      riteniamo essere una scelta ardua e soprattutto molto importante sia per il curriculum scolastico sia per la felicità 
+      futura degli studenti. S.C.H.O.O.L. vuole così assicurarsi che gli studenti abbiano una maggiore consapevolezza delle 
+      dimensioni da considerare nella scelta della scuola superiore nonché suggeriamo un metodo con il quale organizzare il 
+      processo decisionale che li aiuti nel gestire il grande numero di scuole esistenti perché altrimenti è facile sentirsi 
+      opraffatti dalla complessità della scelta stessa e dal numero di scuole esistenti.
+      Speriamo che S.C.H.O.O.L. sia di vostro gradimento!
+    </p>
+  </div>
+<main class="page-content">
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Davide Fabbrico</h2>
+      <p class="copy">Studente magistrale in Statistica e Data Science presso l’Università degli Studi di Firenze</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Massimiliano Gatti</h2>
+      <p class="copy">Studente magistrale in Management e Design dei Servizi presso l’Università degli Studi di Milano-Bicocca</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <h2 class="title">Federico Perlino</h2>
+      <p class="copy">Studente magistrale in Statistica e Data Science presso l’Università degli Studi di Milano-Bicocca</p>
+    </div>
+  </div>
+</main>
+  
+</body>
+
+<script>
+  document.getElementById("myButton").onclick = function () {
+      location.href = "/home";
+  };
+</script>
+</html>

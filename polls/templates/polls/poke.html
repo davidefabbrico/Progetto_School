@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Poke</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+
+<style>
+    @charset "UTF-8";
+/*
+DISCLAIMER: Works best in Chrome! Due to the changes in Chrome's Autoplay Policy, it's likely that you won't hear the nostalgic 8-bit music, though :( You can read up on the details of this over at Google's Developer Blog (https://developers.google.com/web/updates/2017/09/autoplay-policy-changes).
+
+If you want to revisit those settings in your browser you can do this by making changes to the respective Chrome flag here: chrome://flags/#autoplay-policy
+*/
+/*
+Due to performance issues I had to cheat a bit and include the pixel maps as precompiled file, if you want to take a look at the uncompressed/uncompiled version you can do so on Pastebin (https://pastebin.com/QvUwGdNp). The technique used, is the same as in my previous pen (https://codepen.io/kai/pen/eWMMmL) ⚡🐭. If you want to read up on how to do pixel art with Sass, you should definitely check Una Kravet's fantastic blogpost (http://una.im/sass-pixel-art) 🙏.
+
+To generate the pixel maps in a more convenient way, Alex (https://twitter.com/cilice) invested some of his spare time to create a generator that does basically everything for you: https://pokedecss-generator.glitch.me 🎉.
+*/
+@import url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142927/pokemon-pixelart-precompiled.css");
+@font-face {
+  font-family: "Pokemon GB";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142927/Pokemon_GB.eot?#iefix") format("embedded-opentype"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142927/Pokemon_GB.woff") format("woff"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142927/Pokemon_GB.ttf") format("truetype"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142927/Pokemon_GB.svg#PokemonGB") format("svg");
+  font-weight: 400;
+}
+audio {
+  visibility: hidden;
+}
+
+.wrapper {
+  background: #daecff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.composition {
+  position: relative;
+  width: 192px;
+  height: 144px;
+  overflow: hidden;
+  transform: scale(4);
+}
+
+.scene {
+  position: absolute;
+  background: #F9F9F9;
+  top: 20px;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  filter: grayscale(100);
+}
+.scene--1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation: fade 0s 5.3s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--1 .shooting-star {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: -16px;
+  top: -36px;
+  animation: starswipe 0.9s linear;
+  z-index: 3;
+}
+.scene--1 .gamefreak-logo {
+  position: relative;
+  width: 11px;
+  height: 23px;
+  margin-bottom: 8px;
+  animation: shine-logo 0.5s 1s steps(2);
+  z-index: 2;
+}
+.scene--1 .gamefreak {
+  position: relative;
+  width: 80px;
+  height: 8px;
+  animation: shine-title 0.5s 0.7s steps(1);
+  z-index: 2;
+}
+.scene--1 .star-shower-mask {
+  position: absolute;
+  width: 80px;
+  top: 70px;
+  bottom: 0;
+  overflow: hidden;
+  height: 34px;
+}
+.scene--1 .star-shower--light {
+  position: absolute;
+  transform: translateY(-47px);
+  width: 81px;
+  height: 47px;
+  animation: star-shower 2.8s 1.7s linear;
+  animation-fill-mode: forwards;
+}
+.scene--1 .star-shower--dark {
+  position: absolute;
+  transform: translateY(-47px);
+  width: 81px;
+  height: 47px;
+  animation: star-shower 2.8s 1.7s linear, fade 0.1s linear infinite;
+  animation-fill-mode: forwards;
+}
+.scene--2 {
+  overflow: hidden;
+  opacity: 0;
+  z-index: 2;
+  animation: fade 0.1s 4.8s;
+  animation-fill-mode: forwards;
+}
+.scene--2:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #FEFEFE;
+  z-index: 1;
+  opacity: 0;
+  animation: fade 0.8s 13.4s steps(6);
+  animation-fill-mode: forwards;
+}
+.scene--2 .gengar-wrapper {
+  width: 58px;
+  height: 54px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  animation: gg-intro 1.2s 4.8s linear, gg-tackle 1.2s 9s linear;
+  animation-fill-mode: forwards;
+}
+.scene--2 .gengar-wrapper .gengar {
+  position: absolute;
+  width: 58px;
+  height: 54px;
+  animation: fade 0s 8.55s linear reverse, fade 0s 10.4s linear;
+  animation-fill-mode: forwards;
+}
+.scene--2 .gengar-wrapper .gengar--scratch1 {
+  position: absolute;
+  width: 58px;
+  height: 54px;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: fade 0s 8.55s linear, fade 0s 9s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--2 .gengar-wrapper .gengar--scratch2 {
+  position: absolute;
+  width: 58px;
+  height: 54px;
+  opacity: 0;
+  animation: fade 0s 9s linear, fade 0s 10.4s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--2 .opponent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  animation: op-intro 1.2s 4.8s linear, op-bounce-sm 1s 6s 2 linear, op-flinch 0.8s 9.4s linear, op-bounce-bg 1s 11.2s linear, op-slam 0.8s 13.4s linear;
+  animation-fill-mode: forwards;
+}
+.scene--2 .jigglypuff-wrapper {
+  width: 35px;
+  height: 35px;
+}
+.scene--2 .jigglypuff-wrapper .jigglypuff {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  animation: fade 0s 9.4s linear reverse, fade 0s 11.2s linear, fade 0s 12.8s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--2 .jigglypuff-wrapper .jigglypuff--flinch {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  opacity: 0;
+  animation: fade 0s 9.4s linear, fade 0s 11.2s linear reverse, fade 0s 12.8s linear, fade 0s 13.4s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--2 .jigglypuff-wrapper .jigglypuff--tackle {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  opacity: 0;
+  animation: fade 0s 13.4s linear;
+  animation-fill-mode: forwards;
+}
+.scene--2 .nidorino-wrapper {
+  width: 44px;
+  height: 40px;
+  display: none;
+}
+.scene--2 .nidorino-wrapper .nidorino {
+  width: 44px;
+  height: 40px;
+  position: absolute;
+  animation: fade 0s 9.4s linear reverse, fade 0s 11.2s linear, fade 0s 12.8s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--2 .nidorino-wrapper .nidorino--flinch {
+  width: 44px;
+  height: 40px;
+  position: absolute;
+  opacity: 0;
+  animation: fade 0s 9.4s linear, fade 0s 11.2s linear reverse, fade 0s 12.8s linear, fade 0s 13.4s linear reverse;
+  animation-fill-mode: forwards;
+}
+.scene--2 .nidorino-wrapper .nidorino--tackle {
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  opacity: 0;
+  animation: fade 0s 13.4s linear;
+  animation-fill-mode: forwards;
+}
+.scene--3 {
+  opacity: 0;
+  z-index: 3;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fade 0s 14.2s linear;
+  animation-fill-mode: forwards;
+}
+.scene--3 .logo-wrapper {
+  position: absolute;
+  top: 0;
+}
+.scene--3 .pokemon-logo {
+  width: 128px;
+  height: 49px;
+  animation: logo-entrance 0.3s 15s linear;
+  animation-fill-mode: forwards;
+  transform: translateX(-3px) translateY(-50px);
+}
+.scene--3 span {
+  font-family: "Pokemon GB", monospace;
+  font-size: 8px;
+  animation: version-entrance 0.5s 15.7s linear;
+  animation-fill-mode: forwards;
+  display: block;
+  transform: translateX(150px);
+}
+
+@keyframes op-intro {
+  from {
+    transform: translateX(10px) translateY(8px);
+  }
+  to {
+    transform: translateX(110px) translateY(8px);
+  }
+}
+@keyframes op-bounce-sm {
+  0% {
+    transform: translateX(110px) translateY(8px);
+  }
+  25% {
+    transform: translateX(115px) translateY(5px);
+  }
+  50% {
+    transform: translateX(120px) translateY(8px);
+  }
+  75% {
+    transform: translateX(115px) translateY(5px);
+  }
+  100% {
+    transform: translateX(110px) translateY(8px);
+  }
+}
+@keyframes op-flinch {
+  0% {
+    transform: translateX(110px) translateY(8px);
+  }
+  50% {
+    transform: translateX(120px) translateY(-15px);
+  }
+  100% {
+    transform: translateX(130px) translateY(8px);
+  }
+}
+@keyframes op-bounce-bg {
+  0% {
+    transform: translateX(130px) translateY(8px);
+  }
+  25% {
+    transform: translateX(125px) translateY(-5px);
+  }
+  50% {
+    transform: translateX(120px) translateY(8px);
+  }
+  75% {
+    transform: translateX(125px) translateY(-5px);
+  }
+  100% {
+    transform: translateX(130px) translateY(8px);
+  }
+}
+@keyframes op-slam {
+  from {
+    transform: translateX(125px) translateY(5px);
+  }
+  to {
+    transform: translateX(70px) translateY(-30px);
+  }
+}
+@keyframes gg-intro {
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+@keyframes gg-tackle {
+  0% {
+    transform: translateX(-100px);
+  }
+  40% {
+    transform: translateX(-70px);
+  }
+  75% {
+    transform: translateX(-70px);
+  }
+  100% {
+    transform: translateX(-100px);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes starswipe {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(-228px) translateY(180px);
+  }
+}
+@keyframes shine-logo {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes shine-title {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes star-shower {
+  from {
+    transform: translateY(-47px);
+  }
+  to {
+    transform: translateY(47px);
+  }
+}
+@keyframes logo-entrance {
+  from {
+    transform: translateX(-3px) translateY(-50px);
+  }
+  to {
+    transform: translateX(-3px) translateY(20px);
+  }
+}
+@keyframes version-entrance {
+  from {
+    transform: translateY(25px) translateX(150px);
+  }
+  to {
+    transform: translateY(25px) translateX(0);
+  }
+}
+</style>
+<body>
+<!-- partial:index.partial.html -->
+<audio autoplay=''>
+  <source src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/142927/intro.mp3' type='audio/mpeg'>
+</audio>
+<div class='wrapper'>
+  <div class='composition'>
+    <div class='scene scene--1'>
+      <div class='shooting-star'></div>
+      <div class='gamefreak-logo'></div>
+      <div class='gamefreak'></div>
+      <div class='star-shower-mask'>
+        <div class='star-shower--light'></div>
+        <div class='star-shower--dark'></div>
+      </div>
+    </div>
+    <div class='scene scene--2'>
+      <section class='opponent jigglypuff-wrapper'>
+        <figure class='jigglypuff'></figure>
+        <figure class='jigglypuff--flinch'></figure>
+        <figure class='jigglypuff--tackle'></figure>
+      </section>
+      <section class='opponent nidorino-wrapper'>
+        <figure class='nidorino'></figure>
+        <figure class='nidorino--flinch'></figure>
+        <figure class='nidorino--tackle'></figure>
+      </section>
+      <section class='gengar-wrapper'>
+        <figure class='gengar'></figure>
+        <figure class='gengar--scratch1'></figure>
+        <figure class='gengar--scratch2'></figure>
+      </section>
+    </div>
+    <div class='scene scene--3'>
+      <div class='logo-wrapper'>
+        <figure class='pokemon-logo'></figure>
+        <span>D. Edition</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

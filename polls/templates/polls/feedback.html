@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+
+  <title>Questionario</title>
+</head>
+<style>
+
+  .miocheck {
+    margin-right: 15px;
+  }
+
+  .fineButton {
+    background-color: #459dff !important;
+    border-color: #459dff !important;
+    width: 120px;
+
+  }
+
+  .mycontainerEnd {
+    background-color: #f5f5f5;
+    /* margin-right:150px; */
+    margin-top: 30px;
+    /* margin-bottom:30px;  */
+    margin: auto;
+    text-align: right;
+  }
+
+  .accordo {
+    margin-bottom: 40px;
+    margin-top: -5px;
+  }
+
+  .feedback {
+    --normal: #ffffff;
+    --normal-shadow: #D9D8E3;
+    --normal-mouth: #9795A4;
+    --normal-eye: #595861;
+    --active: #F8DA69;
+    --active-shadow: #F4B555;
+    --active-mouth: #F05136;
+    --active-eye: #313036;
+    --active-tear: #76b5e7;
+    --active-shadow-angry: #e94f1d;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+  }
+
+  .feedback li {
+    position: relative;
+    border-radius: 50%;
+    background: var(--sb, var(--normal));
+    box-shadow: inset 3px -3px 4px var(--sh, var(--normal-shadow));
+    transition: background 0.4s, box-shadow 0.4s, transform 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .feedback li:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .feedback li div {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    transform: perspective(240px) translateZ(4px);
+  }
+
+  .feedback li div svg,
+  .feedback li div:before,
+  .feedback li div:after {
+    display: block;
+    position: absolute;
+    left: var(--l, 9px);
+    top: var(--t, 13px);
+    width: var(--w, 8px);
+    height: var(--h, 2px);
+    transform: rotate(var(--r, 0deg)) scale(var(--sc, 1)) translateZ(0);
+  }
+
+  .feedback li div svg {
+    fill: none;
+    stroke: var(--s);
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.4s;
+  }
+
+  .feedback li div svg.eye {
+    --s: var(--e, var(--normal-eye));
+    --t: 17px;
+    --w: 7px;
+    --h: 4px;
+  }
+
+  .feedback li div svg.eye.right {
+    --l: 23px;
+  }
+
+  .feedback li div svg.mouth {
+    --s: var(--m, var(--normal-mouth));
+    --l: 11px;
+    --t: 23px;
+    --w: 18px;
+    --h: 7px;
+  }
+
+  .feedback li div:before,
+  .feedback li div:after {
+    content: "";
+    z-index: var(--zi, 1);
+    border-radius: var(--br, 1px);
+    background: var(--b, var(--e, var(--normal-eye)));
+    transition: background 0.4s;
+  }
+
+  .feedback li.angry {
+    --step-1-rx: -24deg;
+    --step-1-ry: 20deg;
+    --step-2-rx: -24deg;
+    --step-2-ry: -20deg;
+  }
+
+  .feedback li.angry div:before {
+    --r: 20deg;
+  }
+
+  .feedback li.angry div:after {
+    --l: 23px;
+    --r: -20deg;
+  }
+
+  .feedback li.angry div svg.eye {
+    stroke-dasharray: 4.55;
+    stroke-dashoffset: 8.15;
+  }
+
+  .feedback li.angry.active {
+    -webkit-animation: angry 1s linear;
+    animation: angry 1s linear;
+  }
+
+  .feedback li.angry.active div:before {
+    --middle-y: -2px;
+    --middle-r: 22deg;
+    -webkit-animation: toggle 0.8s linear forwards;
+    animation: toggle 0.8s linear forwards;
+  }
+
+  .feedback li.angry.active div:after {
+    --middle-y: 1px;
+    --middle-r: -18deg;
+    -webkit-animation: toggle 0.8s linear forwards;
+    animation: toggle 0.8s linear forwards;
+  }
+
+  .feedback li.sad {
+    --step-1-rx: 20deg;
+    --step-1-ry: -12deg;
+    --step-2-rx: -18deg;
+    --step-2-ry: 14deg;
+  }
+
+  .feedback li.sad div:before,
+  .feedback li.sad div:after {
+    --b: var(--active-tear);
+    --sc: 0;
+    --w: 5px;
+    --h: 5px;
+    --t: 15px;
+    --br: 50%;
+  }
+
+  .feedback li.sad div:after {
+    --l: 25px;
+  }
+
+  .feedback li.sad div svg.eye {
+    --t: 16px;
+  }
+
+  .feedback li.sad div svg.mouth {
+    --t: 24px;
+    stroke-dasharray: 9.5;
+    stroke-dashoffset: 33.25;
+  }
+
+  .feedback li.sad.active div:before,
+  .feedback li.sad.active div:after {
+    -webkit-animation: tear 0.6s linear forwards;
+    animation: tear 0.6s linear forwards;
+  }
+
+  .feedback li.ok {
+    --step-1-rx: 4deg;
+    --step-1-ry: -22deg;
+    --step-1-rz: 6deg;
+    --step-2-rx: 4deg;
+    --step-2-ry: 22deg;
+    --step-2-rz: -6deg;
+  }
+
+  .feedback li.ok div:before {
+    --l: 12px;
+    --t: 17px;
+    --h: 4px;
+    --w: 4px;
+    --br: 50%;
+    box-shadow: 12px 0 0 var(--e, var(--normal-eye));
+  }
+
+  .feedback li.ok div:after {
+    --l: 13px;
+    --t: 26px;
+    --w: 14px;
+    --h: 2px;
+    --br: 1px;
+    --b: var(--m, var(--normal-mouth));
+  }
+
+  .feedback li.ok.active div:before {
+    --middle-s-y: .35;
+    -webkit-animation: toggle 0.2s linear forwards;
+    animation: toggle 0.2s linear forwards;
+  }
+
+  .feedback li.ok.active div:after {
+    --middle-s-x: .5;
+    -webkit-animation: toggle 0.7s linear forwards;
+    animation: toggle 0.7s linear forwards;
+  }
+
+  .feedback li.good {
+    --step-1-rx: -14deg;
+    --step-1-rz: 10deg;
+    --step-2-rx: 10deg;
+    --step-2-rz: -8deg;
+  }
+
+  .feedback li.good div:before {
+    --b: var(--m, var(--normal-mouth));
+    --w: 5px;
+    --h: 5px;
+    --br: 50%;
+    --t: 22px;
+    --zi: 0;
+    opacity: 0.5;
+    box-shadow: 16px 0 0 var(--b);
+    filter: blur(2px);
+  }
+
+  .feedback li.good div:after {
+    --sc: 0;
+  }
+
+  .feedback li.good div svg.eye {
+    --t: 15px;
+    --sc: -1;
+    stroke-dasharray: 4.55;
+    stroke-dashoffset: 8.15;
+  }
+
+  .feedback li.good div svg.mouth {
+    --t: 22px;
+    --sc: -1;
+    stroke-dasharray: 13.3;
+    stroke-dashoffset: 23.75;
+  }
+
+  .feedback li.good.active div svg.mouth {
+    --middle-y: 1px;
+    --middle-s: -1;
+    -webkit-animation: toggle 0.8s linear forwards;
+    animation: toggle 0.8s linear forwards;
+  }
+
+  .feedback li.happy div {
+    --step-1-rx: 18deg;
+    --step-1-ry: 24deg;
+    --step-2-rx: 18deg;
+    --step-2-ry: -24deg;
+  }
+
+  .feedback li.happy div:before {
+    --sc: 0;
+  }
+
+  .feedback li.happy div:after {
+    --b: var(--m, var(--normal-mouth));
+    --l: 11px;
+    --t: 23px;
+    --w: 18px;
+    --h: 8px;
+    --br: 0 0 8px 8px;
+  }
+
+  .feedback li.happy div svg.eye {
+    --t: 14px;
+    --sc: -1;
+  }
+
+  .feedback li.happy.active div:after {
+    --middle-s-x: .95;
+    --middle-s-y: .75;
+    -webkit-animation: toggle 0.8s linear forwards;
+    animation: toggle 0.8s linear forwards;
+  }
+
+  .feedback li:not(.active) {
+    cursor: pointer;
+  }
+
+  .feedback li:not(.active):active {
+    transform: scale(0.925);
+  }
+
+  .feedback li.active {
+    --sb: var(--active);
+    --sh: var(--active-shadow);
+    --m: var(--active-mouth);
+    --e: var(--active-eye);
+  }
+
+  .feedback li.active div {
+    -webkit-animation: shake 0.8s linear forwards;
+    animation: shake 0.8s linear forwards;
+  }
+
+  @-webkit-keyframes shake {
+    30% {
+      transform: perspective(240px) rotateX(var(--step-1-rx, 0deg)) rotateY(var(--step-1-ry, 0deg)) rotateZ(var(--step-1-rz, 0deg)) translateZ(10px);
+    }
+
+    60% {
+      transform: perspective(240px) rotateX(var(--step-2-rx, 0deg)) rotateY(var(--step-2-ry, 0deg)) rotateZ(var(--step-2-rz, 0deg)) translateZ(10px);
+    }
+
+    100% {
+      transform: perspective(240px) translateZ(4px);
+    }
+  }
+
+  @keyframes shake {
+    30% {
+      transform: perspective(240px) rotateX(var(--step-1-rx, 0deg)) rotateY(var(--step-1-ry, 0deg)) rotateZ(var(--step-1-rz, 0deg)) translateZ(10px);
+    }
+
+    60% {
+      transform: perspective(240px) rotateX(var(--step-2-rx, 0deg)) rotateY(var(--step-2-ry, 0deg)) rotateZ(var(--step-2-rz, 0deg)) translateZ(10px);
+    }
+
+    100% {
+      transform: perspective(240px) translateZ(4px);
+    }
+  }
+
+  @-webkit-keyframes tear {
+    0% {
+      opacity: 0;
+      transform: translateY(-2px) scale(0) translateZ(0);
+    }
+
+    50% {
+      transform: translateY(12px) scale(0.6, 1.2) translateZ(0);
+    }
+
+    20%,
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(24px) translateX(4px) rotateZ(-30deg) scale(0.7, 1.1) translateZ(0);
+    }
+  }
+
+  @keyframes tear {
+    0% {
+      opacity: 0;
+      transform: translateY(-2px) scale(0) translateZ(0);
+    }
+
+    50% {
+      transform: translateY(12px) scale(0.6, 1.2) translateZ(0);
+    }
+
+    20%,
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(24px) translateX(4px) rotateZ(-30deg) scale(0.7, 1.1) translateZ(0);
+    }
+  }
+
+  @-webkit-keyframes toggle {
+    50% {
+      transform: translateY(var(--middle-y, 0)) scale(var(--middle-s-x, var(--middle-s, 1)), var(--middle-s-y, var(--middle-s, 1))) rotate(var(--middle-r, 0deg));
+    }
+  }
+
+  @keyframes toggle {
+    50% {
+      transform: translateY(var(--middle-y, 0)) scale(var(--middle-s-x, var(--middle-s, 1)), var(--middle-s-y, var(--middle-s, 1))) rotate(var(--middle-r, 0deg));
+    }
+  }
+
+  @-webkit-keyframes angry {
+    40% {
+      background: var(--active);
+    }
+
+    45% {
+      box-shadow: inset 3px -3px 4px var(--active-shadow), inset 0 8px 10px var(--active-shadow-angry);
+    }
+  }
+
+  @keyframes angry {
+    40% {
+      background: var(--active);
+    }
+
+    45% {
+      box-shadow: inset 3px -3px 4px var(--active-shadow), inset 0 8px 10px var(--active-shadow-angry);
+    }
+  }
+
+  html {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: inherit;
+  }
+
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    font-family: 'Ubuntu', sans-serif;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #f5f5f5;
+    margin: 70px;
+  }
+
+  .square {
+    width: 100%;
+    height: 800px;
+    background: #daecff;
+    z-index: 0;
+    border-radius: 50%;
+    margin-top: -400px;
+  }
+
+  .circle {
+    position: absolute;
+    z-index: -1;
+    left: 0vh;
+    top: 5px;
+    right: 0;
+    display: block;
+  }
+
+  .mainContainer {
+    margin:auto;
+  }
+
+  .mainText {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .textStudbefore {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+
+  .textStud {
+    margin: auto;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 4vw;
+    margin-left: -12vw;
+  }
+
+  .inside {
+    width: max-content;
+  }
+
+  .indent {
+    margin:auto;
+    margin-left: -50px !important;
+    width: 55vw;
+  }
+
+  .required::before {
+    content: "*";
+    color: #c12626;
+  }
+
+  .intermezzo {
+    margin:auto;
+    margin-bottom: 2vw;
+    margin-left: -10vw !important;
+    font-size: large;
+  }
+
+  .titleFirst {
+    margin:auto;
+    /* width: 50vw; */
+    margin-bottom: 4vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    font-size: large;
+  }
+
+  .indentdom {
+    margin-left: 5vw !important;
+  }
+
+</style>
+
+<body style="background-color: #f5f5f5; font-family: 'Ubuntu', sans-serif;">
+  <div class="circle">
+    <div class="square"></div>
+
+  </div class="mainContainer">
+  <form action="" id="formData" method="post">
+    {% csrf_token %}
+    <div class='mainText'>
+      <h1 style='color:#459dff;'>Questionario</h1>
+    </div>
+    <div class='textStudbefore'>
+      <h2>Domande per gli Studenti</h2>
+    </div>
+    <div class='titleFirst'>
+      <p>Prima di vedere nel dettaglio i risultati della tua ricerca, ti chiediamo di indicare quanto ti ritieni in accordo con le seguenti affermazioni, dove 1 indica che sei decisamente non d’accordo, mentre 5 indica che sei pienamente d’accordo. Alle domande contrassegnate dall’asterisco (*) è obbligatorio rispondere. Il tuo feedback è molto importante per poterci migliorare!</p>
+    </div>
+    <div id=feedbackQuest style="margin:auto; width: 45vw;"></div>
+    <div class='mycontainerEnd'>
+      <div style="text-align: center; margin-top: 80px;">
+        <button id="fineButton" class="btn btn-primary fineButton" type="submit" role="button">Risultati</button>
+      </div>
+    </div>
+  </form>
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 30px;">
+      <h2>Come ritieni complessivamente l'utilità dello strumento?</h2>
+    </div>
+  </div>
+
+  <ul class="feedback">
+    <li class="angry">
+      <div>
+        <svg class="eye left">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="eye right">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="mouth">
+          <use xlink:href="#mouth">
+        </svg>
+      </div>
+    </li>
+    <li class="sad">
+      <div>
+        <svg class="eye left">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="eye right">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="mouth">
+          <use xlink:href="#mouth">
+        </svg>
+      </div>
+    </li>
+    <li class="ok">
+      <div></div>
+    </li>
+    <li class="good active">
+      <div>
+        <svg class="eye left">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="eye right">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="mouth">
+          <use xlink:href="#mouth">
+        </svg>
+      </div>
+    </li>
+    <li class="happy">
+      <div>
+        <svg class="eye left">
+          <use xlink:href="#eye">
+        </svg>
+        <svg class="eye right">
+          <use xlink:href="#eye">
+        </svg>
+      </div>
+    </li>
+  </ul>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 4" id="eye">
+      <path d="M1,1 C1.83333333,2.16666667 2.66666667,2.75 3.5,2.75 C4.33333333,2.75 5.16666667,2.16666667 6,1">
+      </path>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 7" id="mouth">
+      <path d="M1,5.5 C3.66666667,2.5 6.33333333,1 9,1 C11.6666667,1 14.3333333,2.5 17,5.5"></path>
+    </symbol>
+  </svg>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+
+    // prendere il valore del radio e poi far visualizzare di seguito
+
+    var csrftoken = '{{csrf_token}}'
+      $(document).ready(function () {
+        var generate = "";
+        axios.get('/get_all_questions_data').then(function(res){
+          for (var index in res.data) {
+            var is_required = (res.data[index].required) ?"required":""
+            var indentation = (res.data[index].required) ?"indent":""
+            var indentdom = (res.data[index].id == 126 | res.data[index].id == 127) ?"indentdom":""
+            var tmpSotto = '';
+            generate = generate + `<div class="${indentation} ${indentdom}" style="margin:auto; width: 55vw;"> <p class="${is_required}"><b>&#160 ${Number(index) + 1}.&#160</b> ${res.data[index].text} </p> <div class="accordo"> <div class="form-check form-check inside">`
+            if (res.data[index].answers.length == 0) { 
+              if (res.data[index].id == 41) {
+                tmpSotto = tmpSotto + `<textarea style="margin-left: -1vw;" class="form-control answers" id="Quest-${res.data[index].id}-0" rows="3"></textarea></div></div>`
+                tmpSotto = tmpSotto + `<div class='intermezzo'><h4>Domande per sondare la qualità dello strumento. Finalità: comprendere: il ruolo dei genitori; la comprensione dello strumento; se ha aumentato la consapevolezza di scuole/dimensioni da tenere in considerazione; se le opzioni suggerite saranno tenute in considerazione.</h4></div>`
+              } else if (res.data[index].id == 141) {
+                tmpSotto = tmpSotto + `<textarea style="margin-left: -1vw;" class="form-control answers" id="Quest-${res.data[index].id}-0" rows="3"></textarea></div></div>`
+                tmpSotto = tmpSotto + `<div class='textStud'><h2>Domande per i Genitori</h2></div>`
+                tmpSotto = tmpSotto + `<div class='intermezzo'><p>Le chiediamo di indicare quanto si ritiene in accordo con le seguenti affermazioni, dove 1 indica che è decisamente non d’accordo, mentre 5 indica che è pienamente d’accordo. Alle domande contrassegnate dall’asterisco (*) è obbligatorio rispondere.</p></div>`
+              }
+              else {
+                tmpSotto = tmpSotto + `<textarea style="margin-left: -1vw;" class="form-control answers" id="Quest-${res.data[index].id}-0" rows="3"></textarea>`
+              }
+            } else {
+              for (var indexAns in res.data[index].answers) {
+                tmpSotto = tmpSotto + `<div> <input ${is_required} class="form-check-input answers" type="${res.data[index].answers[indexAns].type}" name="Quest-${res.data[index].id}" id="Quest-${res.data[index].id}-${res.data[index].answers[indexAns].id}" value="${res.data[index].answers[indexAns].text}"><label class="form-check-label miocheck" for="Quest-${res.data[index].id}-${res.data[index].answers[indexAns].id}">${res.data[index].answers[indexAns].text}</label> </div>`
+              }
+            }
+
+            if (res.data[index].id == 142) {
+              tmpSotto = tmpSotto + `</div><div style="margin:auto; text-align:center;"><h5>Se si, allora...</h5></div>`
+            }
+            generate = generate + tmpSotto + `</div></div></div>`
+      
+          };
+          $('#feedbackQuest').html(generate)
+        })
+      });
+    document.querySelectorAll('.feedback li').forEach(entry => entry.addEventListener('click', e => {
+      if (!entry.classList.contains('active')) {
+        document.querySelector('.feedback li.active').classList.remove('active');
+        entry.classList.add('active');
+      }
+      e.preventDefault();
+    }));
+
+    $(document).ready(function() {
+      var Button = $('#fineButton');
+      var form = $('#formData')
+      $(form).on('submit', function(e) {
+        e.preventDefault()
+        var formData = new FormData()
+        myjs = []
+        $(".answers").each(function(index) {
+          str_tmpSplit = $(this).attr('id').split('-')
+          myjs.push({
+            id_question: str_tmpSplit[1], 
+            id_answer: str_tmpSplit[2],
+            checked: $(this).is(':checked'),
+            text: $(this).val(),
+          })
+        });
+
+          formData.append('jsonData', JSON.stringify(myjs))
+          axios.post('/save_all_questions_data/', formData, {headers: {'X-CSRFToken': csrftoken}}).then(function(response) {
+              // handle success
+              console.log(response);
+          })
+          .catch(function(error) {
+              // handle error
+              console.log(error);
+          })
+          .then(function() {
+              location.href = '/risultati'
+          });
+        });
+
+    });
+
+    // $(document).ready(function() {
+    //   console.log($('[name="Quest-45"]'))
+    //   $('[name="Quest-45"]').click(function() {
+    //     console.log($('input[type="radio"][name="Quest-45"]:checked').val())
+    //     if ($('input[type="radio"][name="Quest-45-23"]:checked').val() == "Si") {
+    //       alert('ciao mi chiamo davide')
+    //     }
+    //   })
+    // });
+
+
+
+  </script>
+</body>
+
+</html>

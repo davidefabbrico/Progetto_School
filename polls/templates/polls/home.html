@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap" rel="stylesheet">
+  <title>S.C.H.O.O.L.</title>
+</head>
+<style>
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.containerscroll {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100px;
+}
+
+@keyframes wheel {
+  to {
+    opacity: 0;
+    top: 60px;
+  }
+}
+@-webkit-keyframes wheel {
+  to {
+    opacity: 0;
+    top: 60px;
+  }
+}
+.scroll {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  animation: down 1.2s infinite;
+  -webkit-animation: down 1.2s infinite;
+  left: -35vw;
+}
+.scroll::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  width: 30px;
+  height: 30px;
+  border-left: 7px solid #f7d9d3;
+  border-bottom: 7px solid #f7d9d3;
+  transform: rotate(-45deg);
+}
+
+@keyframes down {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translateY(15px);
+  }
+  40% {
+    transform: translate(0);
+  }
+}
+@-webkit-keyframes down {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translateY(15px);
+  }
+  40% {
+    transform: translate(0);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    height: 40px;
+  }
+  30% {
+    height: 70px;
+  }
+  60% {
+    height: 40px;
+  }
+}
+@-webkit-keyframes scroll {
+  0% {
+    height: 40px;
+  }
+  30% {
+    height: 70px;
+  }
+  60% {
+    height: 40px;
+  }
+}
+
+.text {
+  display: block;
+  margin-top: 75px;
+  margin-left: -30px;
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-size: 12px;
+  color: #459dff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: .25;
+  animation: pulse 2s linear alternate infinite;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 1;
+  }
+}
+
+  #title {
+    text-align: center;
+    color: #459dff;
+  }
+
+  .form-check.form-switch {
+    margin-bottom: 38px;
+  }
+
+  #choice_test {
+    margin:50px;
+  }
+  .hello-msg {
+    font-size: 18px;
+    color: black;
+    text-align: left;
+  }
+
+  .mycontainerEnd {
+    background-color: #f5f5f5;
+    /* margin-right:150px; */
+    margin-top: 30px;
+    /* margin-bottom:30px;  */
+    margin:auto;
+    text-align: right;
+  }
+
+  #more {
+    display: none;
+  }
+
+  #more1 {
+    display: none;
+  }
+
+  #lunghezza {
+    margin: auto;
+    text-align: right;
+    margin-right: 50px;
+  }
+
+  .cardSelection {
+    position: relative;
+    margin: auto;
+    width: 20px;
+    margin-bottom: 30px;
+    background-color: white;
+    text-align: center;
+    box-shadow: 7px 6px 20px 5px #b1b1b1ad;
+    padding: 30px;
+    border-radius: 40px;
+  }
+
+  .cardSelectionInside {
+    text-align: center;
+  }
+
+
+  .cardSelectionNo {
+    background-color: white;
+    margin: auto;
+    box-shadow: 7px 6px 20px 5px #b1b1b1ad;
+    padding: 30px;
+    border-radius: 45px;
+    text-align: center;
+  }
+
+  .maindiv {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 20px;
+    margin-bottom: 55px;
+  }
+
+  .checkboxSub {
+    margin-right: 10px;
+  }
+
+  .readMore {
+    margin-top: 30px;
+  }
+
+  .blackout.active {
+    display: none;
+  }
+
+  .cannotEnter:not(.active) {
+    display: none;
+  }
+
+  .mycontainer {
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .corrisp {
+    color: green;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .mytitle {
+    margin-right: 0px;
+    margin-left: 0px;
+    text-align: center;
+    margin-top: -28px
+  }
+
+  .endbuttons {
+    margin:30px;
+  }
+
+  #myBottone {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: #989898;
+}
+
+.square {
+    width: 100%;
+    height: 800px;
+    background: #daecff;
+    z-index: 0;
+    border-radius: 50%;
+    margin-top: -320px;
+}
+
+nav.navbar.navbar-light {
+    z-index: 1;
+}
+
+.circle {
+  position: absolute;
+  z-index: -1;
+  left: 0vh;
+  top: 5px;
+  right: 0;
+  display: block;
+}
+
+.squareEnd {
+    width: 100%;
+    height: 800px;
+    background: #daecff;
+    z-index: 0;
+    border-radius: 50%;
+    bottom: 0px
+}
+
+.circleEnd {
+  position: absolute;
+  z-index: -1;
+  left: 0vh;
+  top: 5px;
+  right: 0;
+  display: block;
+}
+
+.desc {
+  margin-bottom: 40px;
+}
+
+a.btn.btn-primary.miobottone {
+    margin-right: 20px;
+    cursor: default;
+}
+
+div#lunghezzaOn {
+    background: #f7674233;
+    color: #f76742;
+    /* border-style: solid; */
+    /* border-color: #c3401f2b; */
+    font-size: 29px;
+    font-weight: 500;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    margin-right: 1.6vw;
+    margin-top: 5px;
+}
+
+.fineButton {
+  background-color: #459dff !important;
+  border-color: #459dff !important;
+  width: 120px;
+
+}
+
+.resetButton {
+  background-color: #f76743 !important;
+  border-color: #f76743 !important;
+  color: white !important;
+  margin-right: 20px;
+}
+
+  #myBtn {
+    background-color: transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: #989898;
+  }
+
+  .bottoni_readMore {
+    text-align: center;
+    margin-top:15px;
+  }
+
+  svg {
+  display: block;
+  max-width: 300px;
+  margin: 50px auto;
+}
+
+svg .circles, svg .pin {
+  transform-origin: center;
+}
+
+svg .pin {
+  opacity: 0;
+  transform: translate(41px, 0);
+}
+
+.circle1, .circle2, .circle3 {
+  transform-origin: center;
+  transform: scale(0.5);
+  opacity: 0;
+}
+
+svg .circles, body.finalized svg .pin {
+  transform-origin: center;
+}
+
+svg .circle3 {
+  -webkit-animation: circlePin ease 1s 0.7s forwards, circlePin2 ease 3s 4s infinite;
+          animation: circlePin ease 1s 0.7s forwards, circlePin2 ease 3s 4s infinite;
+}
+
+svg .circle2 {
+  -webkit-animation: circlePin ease 1s 1s forwards, circlePin2 ease 3s 4.3s infinite;
+          animation: circlePin ease 1s 1s forwards, circlePin2 ease 3s 4.3s infinite;
+}
+
+svg .circle1 {
+  -webkit-animation: circlePin ease 1s 1.3s forwards, circlePin2 ease 3s 4.6s infinite;
+          animation: circlePin ease 1s 1.3s forwards, circlePin2 ease 3s 4.6s infinite;
+}
+
+svg .pin {
+  -webkit-animation: fadeDown ease 2s 1.6s forwards;
+          animation: fadeDown ease 2s 1.6s forwards;
+}
+
+@-webkit-keyframes wheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+@keyframes wheel {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@-webkit-keyframes circlePin {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes circlePin {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes circlePin2 {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes circlePin2 {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translate(41px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(41px, 8px);
+  }
+}
+@keyframes fadeDown {
+  0% {
+    opacity: 0;
+    transform: translate(41px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(41px, 8px);
+  }
+}
+
+.geoloc {
+  color: #459dff;
+  font-size: xx-large;
+  font-weight: bolder;
+  margin: auto;
+  text-align: center;
+  margin-top: -50px;
+}
+
+.miobottone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    color: transparent !important;
+    width: 1px;
+    height: 1px;
+}
+
+.internal1 {
+    width: 80px;
+    margin: auto;
+    text-align: left;
+}
+
+.internal2 {
+    width: 110px;
+    margin: auto;
+    text-align: left;
+}
+
+.internal3 {
+    width: 175px;
+    margin: auto;
+    text-align: left;
+}
+
+.internal4 {
+    width: 233px;
+    margin: auto;
+    text-align: left;
+}
+
+.internal5 {
+    width: 233px;
+    margin: auto;
+    text-align: left;
+}
+
+.internal6 {
+    width: 209px;
+    margin: auto;
+    text-align: left;
+}
+
+
+</style>
+<body style="background-color: #f5f5f5; font-family: 'Ubuntu', sans-serif;">
+<div class="cannotEnter active">
+  <!-- partial:index.partial.html -->
+<svg class="marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 125" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin-top:10vh;">
+  <defs>
+    <path id="b" d="M21.9 0C10.44 0 .85 9.2.04 20.95a22.7 22.7 0 0 0 4.65 14.99l15.68 21.01a1.93 1.93 0 0 0 3.1 0l15.67-21.01a22.7 22.7 0 0 0 4.65-15C42.98 9.2 33.38 0 21.91 0zm0 27.02a7.36 7.36 0 1 1 7.33-7.33 7.35 7.35 0 0 1-7.32 7.36v-.03z"/>
+    <filter id="a" width="132%" height="124.3%" x="-16%" y="-8.7%" filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1"/>
+    </filter>
+  </defs>
+  <g class="circles" fill="#459dff" fill-opacity=".2" opacity=".7">
+    <g class="circle1"><circle cx="62.5" cy="62.5" r="62.5"/></g>
+    <g class="circle2"><circle cx="62.5" cy="62.5" r="47.5"/></g>
+    <g class="circle3"><circle cx="63" cy="63" r="31"/></g>
+  </g>
+  <g class="pin" fill-rule="nonzero">
+    <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+    <use fill="#459dff" fill-rule="evenodd" xlink:href="#b"/>
+  </g>
+</svg>
+<!-- partial -->
+<div class="geoloc col-8" style="margin: auto; text-align: center; margin-top: 10vh;">
+  <h1>Abilita la Geolocalizzazione per continuare ad utilizzare S.C.H.O.O.L.</h1>
+  <h4>In questo modo possiamo suggerirti scuole anche in base alla distanza dalla tua posizione.</h4>
+</div>
+</div>
+
+<div class="blackout active">
+  <div class="circle">
+    <div class="square"></div>
+  </div>
+
+  <div id="navigation" style="position: fixed;
+  z-index: 3000;
+  right: 0;
+  bottom: 5vh;
+  display: block;">
+        <div id="lunghezzaOn"></div>
+  </div>
+
+  <div id="hiddenwhendiv" class="containerscroll">
+    <div class="field">
+      <a href="#risultati"><div class="scroll"></div></a>
+    </div>
+  </div>
+    <nav class="navbar navbar-light" style="background-color: #daecff; padding-left: 30px; padding-top: 30px; margin-bottom: 30px;">
+        <div style="text-align: right;">
+          <span class="hello-msg" style="text-align: left;">Ciao, <b>{{request.user}}</b></span>
+          <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+        </div>
+    </nav>
+    <div class="maindiv" style="z-index: 2; background-color: transparent; text-align: center;">
+      <a class="btn btn-primary miobottone" href="{% url 'poke' %}" role="button">Link</a>
+    
+      <div class="mytitle">
+        <h1>
+          <b>Progetto S.C.H.O.O.L.</b>
+        </h1>
+      </div>
+      
+
+      <div class="mycontainer" style="z-index: auto"></div>
+
+        <div id="maintitle" style="z-index: 2; background-color: transparent;">
+          <h2>Come funziona?</h2>
+        </div>
+        <div class="desc">
+          <p>
+            Qui sotto ti sono suggerite delle dimensioni dove ciascuna delle quali è riferita a una particolare caratteristica 
+            delle scuole. Inizia col selezionarne una che ritieni sia importante che la tua scuola ideale possegga. Il numero 
+            in basso a destra indica quante scuole possiedono la dimensione da te selezionata. Se il contatore è pari a zero, 
+            vuol dire che non sono state trovate corrispondenze. <b>Tieni conto che l’ordine con il quale selezioni le dimensioni 
+              rispecchia la tua gerarchia di preferenze, così che la prima dimensione che selezioni è quella che ritieni essere più 
+              importante e sulla quale sarà effettuata una prima scrematura tra le scuole presenti.</b>  La freccia che apparirà in basso 
+            a sinistra, se ci clicchi sopra, ti mostrerà quali scuole possiedono la caratteristica da te selezionata. Se selezioni 
+            una seconda dimensione, verrà effettuata un’ulteriore scrematura usando come base le scuole che ti sono state mostrate 
+            dopo la scelta della tua prima dimensione, e così di seguito per tutte le dimensioni selezionate. Ti saranno perciò 
+            mostrate le scuole che presentano <b>contemporaneamente</b> le dimensioni da te scelte. Qualora volessi ricominciare la 
+            ricerca oppure deselezionare una dimensione precedentemente selezionata premi il tasto “Reset” in fondo alla pagina. Il tasto “Vedi risultati” ti permetterà di analizzare in dettaglio 
+            le scuole che S.C.H.O.O.L. ti ha suggerito, previa compilazione di un questionario per farci sapere cosa ne pensi di 
+            S.C.H.O.O.L. Il tuo feedback è molto importante!  
+            <p style="color: #f76743;"> <b>Se le informazioni non vengono visualizzate, ricaricate la pagina. </b></p>
+          </p>
+        </div>
+      </div>
+
+    
+      <div class="cardSelection col-10">
+        <div id="title">
+          <h3>Tipologia</h3>
+        </div>
+        <div>
+          <p>Per scuola non statale si intende una scuola non gestita dallo Stato. L’istruzione, 
+            in questo caso, potrebbe essere più costosa rispetto a una scuola gestita dallo Stato (e quindi statale).
+          </p>
+        </div>
+        
+          <form action="" method="post">
+            {% csrf_token %}
+            <fieldset>
+              <div class='cardSelectionInside'>
+                <div class="internal2">
+                  <input type="radio" name="choice_par" id="choice_par" value="Statale">
+                  <label for="choice_par">Statale</label><br>
+                  <input type="radio" name="choice_par" id="choice_par2" value="Non Statale">
+                  <label for="choice_par2">Non Statale</label><br>
+              </div>
+              </div>
+            </fieldset>
+          </form>
+      </div>
+
+      <div class="cardSelection col-10">
+
+        <div id="title">
+          <h3>Distanza</h3>
+        </div>
+        <div>
+          <p>Indica la distanza dalla tua posizione intesa come raggio in linea d’aria.</p>
+        </div>
+        <div>
+          <form action="" method="post">
+            {% csrf_token %}
+            <fieldset>
+              <div class='cardSelectionInside'>
+                <div class="internal1">
+                  <input type="radio" name="choice_dist" id="choice_dist" value="10">
+                  <label for="choice_dist">10 Km</label><br>
+                  <input type="radio" name="choice_dist" id="choice_dist2" value="20">
+                  <label for="choice_dist2">20 Km</label><br>
+                  <input type="radio" name="choice_dist" id="choice_dist3" value="30">
+                  <label for="choice_dist3">30 Km</label><br>
+                  <input type="radio" name="choice_dist" id="choice_dist4" value="40">
+                  <label for="choice_dist4">+30 Km</label><br>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+  
+
+    
+      <div class="cardSelection col-10">
+        <div id="title">
+          <h3>Durata Scolastica</h3>
+        </div>
+        <div>
+          <p>La durata minima prevista per l’istruzione superiore è di due anni; quella massima è di cinque.
+          </p>
+        </div>
+        <div class="form-check checkbox">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div>
+              <input class="form-check-input" name="choice_dur" type="checkbox" id="choice_dur" value="2">
+              <label class="form-check-label" for="flexCheckDefault">
+                2 Anni
+              </label>
+            </div>
+            <div>
+              <input class="form-check-input" name="choice_dur" type="checkbox" id="choice_dur1" value="3">
+              <label class="form-check-label" for="flexCheckDefault">
+                3 Anni
+              </label>
+            </div>
+            <div>
+              <input class="form-check-input" name="choice_dur" type="checkbox" id="choice_dur2" value="4">
+              <label class="form-check-label" for="flexCheckDefault">
+                4 Anni
+              </label>
+            </div>
+            <div>
+              <input class="form-check-input" name="choice_dur" type="checkbox" id="choice_dur3" value="5">
+              <label class="form-check-label" for="flexCheckDefault">
+                5 Anni
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="cardSelection col-10">
+        <div class='cardSelectionInside'>
+          <div id="title">
+            <h3>
+              Corsi di Recupero / Approfondimento
+            </h3>
+          </div>
+          <div>
+            <p>
+              Si intendono attività come aiuto nello svolgimento dei compiti, 
+              corsi di recupero, approfondimento di varie materie, ecc.
+            </p>
+          </div>
+          <div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="choice_appr" name='choice_appr' value='true'>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Corsi di Recupero / Approfondimento</label>
+            </div>
+          <div id="title">
+            <h3>
+              Attività Extra Curriculari
+            </h3>
+          </div>
+          <div>
+            <p>
+              Attività come teatro, sport, ecc.
+            </p>
+          </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="choice_att" name='choice_att' value='true'>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Attività Extra Curriculari</label>
+            </div>
+            <div id="title">
+              <h3>
+                Borsa di Studio
+              </h3>
+            </div>
+          <div>
+            <p>
+              Alcune scuole offrono borse di studio non finanziate dalla Regione/Stato.
+            </p>
+          </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="choice_bor" name='choice_bor' value='true'>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Borsa di Studio</label>
+            </div>
+            <div id="title">
+              <h3>
+                Studio / Stage all'estero
+              </h3>
+            </div>
+          <div>
+            <p>
+              Attività organizzate dalle scuole per svolgere una parte dell’anno scolastico all’estero così 
+              come l’esperienza di stage.
+            </p>
+          </div>
+            <div class="form-check form-switch ">
+              <input class="form-check-input" type="checkbox" id="choice_stage" name='choice_stage' value='true'>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Studio / Stage all'estero</label>
+            </div>
+            <div id="title">
+              <h3>
+                Corsi per Certificazioni
+              </h3>
+            </div>
+          <div>
+            <p>
+              Corsi organizzati per ottenere certificazioni quali ICDL, linguistiche, specialistiche, ecc.
+            </p>
+          </div>
+            <div class="form-check form-switch ">
+              <input class="form-check-input" type="checkbox" id="choice_cert" name='choice_cert' value='true'>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Corsi per Certificazioni</label>
+            </div>
+          <div>
+            <div id="title">
+              <h3>
+                Tutoraggio e Orientamento
+              </h3>
+            </div>
+            <p>
+              Attività di supporto come sportello di ascolto, affiancamento, ecc.
+            </p>
+          </div>
+            <div class="form-check form-switch ">
+              <input class="form-check-input" type="checkbox" id="choice_tut" name='choice_tut' value='true'>
+              <label class="form-check-label" for="flexSwitchCheckDefault">Tutoraggio e Orientamento</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <div class="cardSelection col-10">
+        <div id="title">
+          <h3>Aree d'interesse</h3>
+        </div>
+        <div>
+          <p>Per area di interesse si intendono le quattro macroaree con le quali sono classificate le scuole 
+            superiori italiane. Puoi scegliere una o più macroaree (per esempio “Istruzione liceale” e “Istruzione 
+            tecnica”) e/o una o più sotto-opzioni (per esempio “Liceo scientifico”, “Amministrazione, finanza 
+            e marketing”, ecc.). Per informazioni sul Sistema IeFP Regionale vedi <a href="https://usr.istruzione.lombardia.gov.it/istruzione/iefp/">qui</a>.</p>
+        </div>
+        <div class="internal3">
+          <div id="areainteresse"></div>
+        </div>
+        <span id="dots1"></span><span id="more1">
+          <div id="title" class="readMore">
+            <h4>Dettagli Area Interesse</h4>
+          </div>
+          <div class='cardSelectionInside'>
+            <div class="internal4">
+              <div id="dettagliareainteresse"></div>
+            </div>
+          </div>
+        </span>
+        <div class="bottoni_readMore">
+          <button onclick="showMore1()" id="myBottone">---- Clicca per scegliere le aree di interesse ----</button>
+        </div>
+      </div>
+
+      <div class="cardSelection col-10">
+        <div id="title">
+          <h3>Macro Materie</h3>
+        </div>
+        <div>
+          <p>Puoi selezionare sia la macrocategoria (per esempio “Materie Umanistiche, Artistiche e Sportive”) sia 
+            le singole materie (per esempio “Latino”, “Greco”, ecc.).
+          </p>
+        </div>
+        <div class="internal5">
+          <div id="parent_subject"></div>
+        </div>
+        <span id="dots"></span><span id="more">
+          <div id="title" class="readMore">
+            <h4>Materie</h4>
+          </div>
+          <div class="internal6">
+            <div id="subject"></div>
+          </div>
+        </span>
+        <div class="bottoni_readMore">
+          <button onclick="showMore()" id="myBtn">---- Clicca per scegliere le Materie ----</button>
+        </div>
+      </div>
+    
+
+      <div class="cardSelectionNo col-10">
+
+        <div class="container overflow-x:auto">
+          <h2 id="mytitle">Risultati</h2><br>
+          <div id="risultati"></div>
+
+        </div>
+      </div>
+
+      <div class='mycontainerEnd'>
+        <div style="text-align: center; margin-top: 30px; margin-bottom: 140px;">
+              <a class="btn btn-primary resetButton" onclick="resetForm()" id="choice_reset" name='choice_reset' role="button">Reset</a>
+              <a class="btn btn-primary fineButton" href="{% url 'feedback' %}" role="button">Vedi risultati</a>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    {% load static %}
+    <script>
+      var csrftoken = '{{ csrf_token }}';
+      var user_id = '{{ request.user.id }}';
+    </script>
+    <script src="{% static 'home.js' %}"></script> 
+    <!-- polls/ -->
+    <script>
+
+      $(document).ready(function () {
+        App.setup();
+      });
+
+      var cards = $(".cardSelection");
+      for (var i = 0; i < cards.length; i++) {
+        var target = Math.floor(Math.random() * cards.length - 1) + 1;
+        var target2 = Math.floor(Math.random() * cards.length - 1) + 1;
+        cards.eq(target).before(cards.eq(target2));
+      }
+
+      function showMore() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+
+        if (dots.style.display === "none") {
+          dots.style.display = "inline";
+          btnText.innerHTML = "---- Clicca per scegliere le materie ----";
+          moreText.style.display = "none";
+        } else {
+          dots.style.display = "none";
+          btnText.innerHTML = "---- Leggi meno ----";
+          moreText.style.display = "inline";
+        }
+      }
+
+      function showMore1() {
+        var dots = document.getElementById("dots1");
+        var moreText = document.getElementById("more1");
+        var btnText = document.getElementById("myBottone");
+
+        if (dots1.style.display === "none") {
+          dots.style.display = "inline";
+          btnText.innerHTML = "---- Clicca per scegliere le aree di interesse ----";
+          moreText.style.display = "none";
+        } else {
+          dots.style.display = "none";
+          btnText.innerHTML = "---- Leggi meno ----";
+          moreText.style.display = "inline";
+        }
+      }
+
+      $(document).on('change', "[name*='choice']", function () {
+        App.myUpdate();
+      })
+
+
+      function resetForm() {
+        $('input[type="checkbox"]').prop('checked', false);
+        $('input[type="radio"]').prop('checked', false);
+
+        var formData = new FormData()
+        var reset = document.querySelector('#choice_reset')
+        formData.append('action', 'save_reset')
+        formData.append('choice_reset', event.target.value)
+        axios.post('/salvadati/', formData, { headers: { 'X-CSRFToken': csrftoken } }).then(function (response) {
+          // handle success
+          console.log(response.data.response);
+          App.myUpdate();
+        })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+          .then(function () {
+            // always executed
+          });
+      }
+
+    </script>
+  </div>
+</body>
+
+</html>
