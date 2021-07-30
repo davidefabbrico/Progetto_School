@@ -49,3 +49,6 @@ When you have install, configurate the local server and create a database you ca
   ```
   
 For the query in the existing table you can run the shell with: `python3 manage.py shell`
+
+
+Find the website at https://progettoschool.it
